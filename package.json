@@ -20,5 +20,8 @@
     "node-telegram-bot-api": "^0.66.0",
     "puppeteer": "^24.2.0",
     "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@sparticuz/chromium": "^132.0.0"
   }
 }
