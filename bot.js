@@ -2,6 +2,20 @@ require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const puppeteer = require('puppeteer');
 const winston = require('winston');
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer';
+
+app.get('/', (req, res) => {
+  res.send('Telegram Bot is running.');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
+
 
 // Load configuration from environment variables
 const token = process.env.TG_TOKEN;
@@ -203,4 +217,4 @@ process.on('SIGTERM', () => {
   process.exit(0);
 });
 
-logger.info('Bot is running...');
+
