@@ -84,7 +84,7 @@ function withTimeout(promise, ms, errorMessage) {
 async function scrapeUntilButtonFound(url, cancellationToken) {
     let browser;
     try {
-      browser = await puppeteer.launch({
+      browser = await puppeteer.launch({ executablePath: '/tmp/puppeteer/chrome/linux-133.0.6943.53/chrome-linux64/chrome',
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       });
       const page = await browser.newPage();
