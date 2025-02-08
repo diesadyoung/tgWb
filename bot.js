@@ -1,12 +1,10 @@
-process.env.PUPPETEER_CACHE_DIR = '/opt/render/.cache/puppeteer';
 require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const puppeteer = require('puppeteer');
 const winston = require('winston');
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
-
+const PORT = process.env.PORT || 8080;
 
 
 app.get('/', (req, res) => {
@@ -190,6 +188,7 @@ bot.onText(/\/scrape (.+)/, async (msg, match) => {
   } catch (error) {
     logger.error('Scraping stopped:', error.message);
     bot.sendMessage(chatId, `Scraping stopped: ${error.message}`);
+    console.log(error)
   } finally {
     // Remove the controller whether scraping was successful or cancelled.
     delete scrapingControllers[chatId];
