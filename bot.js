@@ -1,3 +1,4 @@
+process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer';
 require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const puppeteer = require('puppeteer');
@@ -6,7 +7,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer';
+
 
 app.get('/', (req, res) => {
   res.send('Telegram Bot is running.');
@@ -85,7 +86,9 @@ function withTimeout(promise, ms, errorMessage) {
 async function scrapeUntilButtonFound(url, cancellationToken) {
     let browser;
     try {
-      browser = await puppeteer.launch();
+      browser = await puppeteer.launch({
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+      });
       const page = await browser.newPage();
   
       await page.setUserAgent(
